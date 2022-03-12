@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/mdui/css/mdui.min.css}">
+    <title th:text="${location}">视频播放</title>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .links a {
+            color: rgba(0, 0, 0, .87);
+            text-decoration: none;
+        }
+
+        .links a:visited {
+            color: rgba(0, 0, 0, .87);
+            text-decoration: none;
+        }
+
+        .links a:hover {
+            color: #FF4081;
+            text-decoration: underline;
+        }
+    </style>
+    <script src="https://cdn.bootcss.com/flv.js/1.4.0/flv.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    <!--<script th:src="@{/js/login.js}"></script>-->
+    <script th:src="@{/js/easyPlayer/EasyPlayer-element.min.js}"></script>
+    <script th:src="@{/js/vars.js}"></script>
+    <script th:src="@{/js/video.js}"></script>
+
+</head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-pink">
+<header th:replace="common :: header"></header>
+<nav th:replace="common :: nav"></nav>
+<section class="mdui-container">
+    <div th:unless="${#lists.isEmpty(links)}" class="mdui-card" style="margin-bottom: 8px;">
+        <div class="mdui-card-content links">
+            <span th:each="link:${links}"><a th:href="${'/?location='+link.link}"
+                                             th:text="${link.name}"></a><span>&#92;</span></span>
+        </div>
+    </div>
+    <div th:if="${currentUser!=null}" class="mdui-table-fluid">
+        <div>
+            <button  th:unless="${currentUser.getAuth().equals('user')}" name="stream" id="stream">获取直播流</button>
+            <button id="play" >播放视频</button>
+            <input type="text" name="seek" id="seekin" placeholder="请输入时间(秒)" >
+        </div>
+
+<!--       <div>-->
+<!--           <video id="videoElement" style="width: 80%;" controls="controls"></video>-->
+<!--       </div>-->
+    </div>
+    <br/>
+    <div class="mdui-col-lg-12 mdui-col-md-12 mdui-col-sm-12" >
+        <easy-player id="player" width="100%" live="true" show-custom-button="true"></easy-player>
+    </div>
+</section>
+<footer th:replace="common :: foot"></footer>
+<script th:src="@{/mdui/js/mdui.min.js}"></script>
+</body>
+</html>

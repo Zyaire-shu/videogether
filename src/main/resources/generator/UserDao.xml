@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.zyaire.videogether.dao.UserDao">
+  <resultMap id="BaseResultMap" type="top.zyaire.videogether.domain.User">
+    <id column="UserId" jdbcType="INTEGER" property="userid" />
+    <result column="UserName" jdbcType="VARCHAR" property="username" />
+    <result column="PassWord" jdbcType="VARCHAR" property="password" />
+    <result column="Auth" jdbcType="VARCHAR" property="auth" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    UserId, UserName, `PassWord`, Auth
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from User
+    where UserId = #{userid,jdbcType=INTEGER}
+  </select>
+  <select id="checkLogin" resultType="java.lang.Integer">
+    select count(*) from User where UserName=#{name} and Password=#{pass}
+  </select>
+  <select id="selectByUserName" resultType="top.zyaire.videogether.domain.User">
+    select
+    <include refid="Base_Column_List" />
+    from User
+    where UserName = #{username}
+  </select>
+  <select id="selectUserCount" resultType="java.lang.Integer">
+    select count(*)
+    from User
+    where UserName = #{username}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from User
+    where UserId = #{userid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="UserId" keyProperty="userid" parameterType="top.zyaire.videogether.domain.User" useGeneratedKeys="true">
+    insert ignore into User (UserName, `PassWord`, Auth
+      )
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{auth,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="UserId" keyProperty="userid" parameterType="top.zyaire.videogether.domain.User" useGeneratedKeys="true">
+    insert ignore into User
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        UserName,
+      </if>
+      <if test="password != null">
+        `PassWord`,
+      </if>
+      <if test="auth != null">
+        Auth,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="auth != null">
+        #{auth,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="top.zyaire.videogether.domain.User">
+    update User
+    <set>
+      <if test="username != null">
+        UserName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `PassWord` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="auth != null">
+        Auth = #{auth,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UserId = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.zyaire.videogether.domain.User">
+    update User
+    set UserName = #{username,jdbcType=VARCHAR},
+      `PassWord` = #{password,jdbcType=VARCHAR},
+      Auth = #{auth,jdbcType=VARCHAR}
+    where UserId = #{userid,jdbcType=INTEGER}
+  </update>
+</mapper>

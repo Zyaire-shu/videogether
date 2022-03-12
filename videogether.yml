@@ -1,0 +1,12 @@
+##ffmpeg的路径
+ffmpegPath: D:/SDK/ffmpeg/bin
+ffmpegThreads: 8
+videoPath:
+  - D:\迅雷下载\視頻
+  - C:\Users\ZyaireShu\Videos
+#远程rtmp服务器的端口
+rtmpPort: 1935
+#远程rtmp服务器的地址
+rtmpAddress: 192.168.1.254
+#用于播放的http端口
+httpFlvPort: 8091

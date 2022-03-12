@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/mdui/css/mdui.min.css}">
+    <title>直播列表</title>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .links a {
+            color: rgba(0, 0, 0, .87);
+            text-decoration: none;
+        }
+
+        .links a:visited {
+            color: rgba(0, 0, 0, .87);
+            text-decoration: none;
+        }
+
+        .links a:hover {
+            color: #FF4081;
+            text-decoration: underline;
+        }
+    </style>
+    <script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/js/vars.js}"></script>
+    <script th:src="@{/js/list.js}"></script>
+</head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-pink">
+<header th:replace="common :: header"></header>
+<nav th:replace="common :: nav"></nav>
+<section class="mdui-container">
+        <div class="mdui-table-fluid">
+            <table class="mdui-table mdui-table-hoverable">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>名称</th>
+                    <th>播放</th>
+                    <th>删除</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="key,itor:${lists.keySet()}">
+                    <td><span th:text="${itor.index+1}" ></span></td>
+                    <td><span id="videoPath" th:text="${key}" ></span></td>
+                    <td><button id="play" th:onclick="play([[${key}]])">播放</button></td>
+                    <td th:if="${currentUser!=null}"><button th:if="!${currentUser.getAuth().equals('user')}" id="kill" th:onclick="kill([[${key}]])">删除</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+</section>
+<script th:src="@{/mdui/js/mdui.min.js}"></script>
+</body>
+</html>

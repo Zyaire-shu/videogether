@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>注册</title>
+    <link rel="stylesheet" th:href="@{/mdui/css/mdui.min.css}">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/js/vars.js}"></script>
+    <script th:src="@{/js/register.js}"></script>
+</head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-pink">
+<header th:replace="common :: header"></header>
+<nav th:replace="common :: nav"></nav>
+<div class="mdui-container ">
+    <!-- <img class="wave" src="img/wave.png">-->
+    <div class="container">
+        <!-- <div class="img">
+             <img src="img/bg.svg">
+         </div>-->
+        <div class="login-content">
+            <div id="form">
+                <img th:src="@{/image/avatar.svg}">
+                <h2 class="title">Welcome</h2>
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <h5 id="cc">用户名</h5>
+                        <input type="text" required id="username" class="input" >
+                    </div>
+                </div>
+                <div class="input-div pass">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        <h5 id="passwordInit">密码</h5>
+                        <input type="password" id="password" required class="input passin">
+                    </div>
+                </div>
+                <div class="input-div pass">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        <h5  id="result">重复密码</h5>
+                        <input type="password" id="password-repeat" required class="input passin">
+
+                    </div>
+                </div>
+                <a th:href="@{/login}" class="aToRight">去登录</a>
+                <input type="submit" class="btn" value="注册" id="registerBtn">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+</div>
+<footer th:replace="common :: foot"></footer>
+<script th:src="@{/mdui/js/mdui.min.js}"></script>
+</body>
+</html>
